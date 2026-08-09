@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import footballImage from "../WhatsApp Image 2026-08-08 at 2.12.33 PM.jpeg";
+import Events from "./Events";
+import MyBookings from "./Mybookings";
+
 
 
 const events = [
@@ -86,7 +89,21 @@ function Event() {
   const [category, setCategory] = useState("All");
   const [bookings, setBookings] = useState([]);
   const [page, setPage] = useState("home");
-  const [activeNav, setActiveNav] = useState("home");
+  const [activeNav, setActiveNav] = useState("home");  
+
+  if (page=== "events"){
+    return React.createElement(Events,{
+      goHome: ()=> setPage("home"),
+      goBookings: ()=> setPage("bookings")
+    });
+  }
+
+  if (page=== "bookings"){
+    return React.createElement(MyBookings,{
+      goHome: ()=> setPage("home"),
+      goEvents: ()=> setPage("events")
+    });
+  }
 
   function bookEvent(event) {
     const alreadyBooked = bookings.some(
@@ -105,6 +122,9 @@ function Event() {
         " booked successfully!"
     );
   }
+   function callEvents(){
+    return <Events />;
+   }
 
   function goToEvents() {
     setPage("home");
@@ -234,7 +254,7 @@ function Event() {
     activeNav: {
       color: "#5733d5",
       borderBottom:
-        "2px solid #5733d5",
+        "3px solid #5733d5",
     },
 
     account: {
@@ -575,7 +595,7 @@ function Event() {
             },
             onClick: ()=>{
                 setActiveNav("events");
-                goToEvents();
+                setPage("events");
             },
           },
           "Events"
@@ -594,8 +614,7 @@ function Event() {
               setActiveNav("bookings");
 
               window.scrollTo({
-                top:0,
-                behavior: "smooth",
+                  behavior: "smooth",
               });
             },   
           },

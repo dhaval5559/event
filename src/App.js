@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import Event from './Component/Event';
+import React from 'react';
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       </header>
     </div>
   );
+  return React.createElement(Event);
 }
 
 export default App;
